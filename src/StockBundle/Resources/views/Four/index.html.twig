@@ -1,0 +1,351 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Fournisseur | Pharma'Net{% endblock %}
+
+
+{% block liste %} active {% endblock %}
+{% block four %} active {% endblock %}
+
+{% block page_header %}
+                <h3 class="page-title">
+                Fournisseur / Fabriquant</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Liste</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Fournisseur / Fabriquant</a>
+                        </li>
+                    </ul>
+                    <div class="page-toolbar">
+                        <div class="btn-group pull-right">
+                     <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                     Actions <i class="fa fa-angle-down"></i>
+                     </button>
+                     <ul class="dropdown-menu pull-right" role="menu">
+                     </ul>
+                  </div>
+                    </div>
+                </div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="portlet box blue">
+				<div class="portlet-title">
+								<div class="caption">
+									<i class="icon-basket"></i></i>Liste des Fournisseurs
+								</div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+<div class="portlet-body">
+    <div class="table-toolbar">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="btn-group">
+                                    <button data-target="#newFour" data-toggle="modal" class="btn btn-circle blue">
+                                    Add Fournisseur <i class="fa fa-plus"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+	<table class="table table-striped table-bordered table-hover" id="prod" >
+        <thead>
+            <tr>
+                <th class="table-checkbox">
+                    <input type="checkbox" class="group-checkable" data-set="#prod .checkboxes"/>
+                </th>
+                <th>Code</th>
+                <th>Nom</th>
+                <th>Code Postal</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>E-mail</th>
+                <th>Type</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+          {% for prod in four %}
+            <tr class="odd gradeX">
+                <td>
+                    <input type="checkbox" class="checkboxes" value="1"/>
+                </td>
+                <td>{{ prod.code }}</td>
+                <td>{{ prod.nom }}</td>
+                <td>{{ prod.codePostal.nom}} - {{prod.codePostal.ville.nom}}</td>
+                <td>{{ prod.telephone }}</td>
+                <td>{{ prod.adresse }}</td>
+                <td>{{ prod.email }}</td>
+                <td>{{ prod.type }}</td>
+                <td>
+                	<a href="{{path('updateUser',{'id':prod.id})}}" class="btn btn-icon-only btn-circle blue"><i class="fa fa-pencil"></i></a>
+                    <a href="{{path('delFour',{'id':prod.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');"> <i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+   </div>
+</div>
+
+<div class="portlet box blue">
+				<div class="portlet-title">
+								<div class="caption">
+									<i class="icon-basket"></i></i>Liste des Fabriquants
+								</div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+<div class="portlet-body">
+    <div class="table-toolbar">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="btn-group">
+                                    <button data-target="#newFab" data-toggle="modal" class="btn btn-circle blue">
+                                    Add Fabriquant <i class="fa fa-plus"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+	<table class="table table-striped table-bordered table-hover" id="rayon" >
+        <thead>
+            <tr>
+                <th class="table-checkbox">
+                    <input type="checkbox" class="group-checkable" data-set="#rayon .checkboxes"/>
+                </th>
+                <th>Code</th>
+                <th>Nom</th>
+                <th>Code Postal</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>E-mail</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+          {% for prod in fab %}
+            <tr class="odd gradeX">
+                <td>
+                    <input type="checkbox" class="checkboxes" value="1"/>
+                </td>
+                <td>{{ prod.code }}</td>
+                <td>{{ prod.nom }}</td>
+                <td>{{ prod.codePostal.nom}} - {{prod.codePostal.ville.nom}}</td>
+                <td>{{ prod.telephone }}</td>
+                <td>{{ prod.adresse }}</td>
+                <td>{{ prod.email }}</td>
+                <td>
+                	<a href="{{path('updateUser',{'id':prod.id})}}" class="btn btn-icon-only btn-circle blue"><i class="fa fa-pencil"></i></a>
+                    <a href="{{path('delFab',{'id':prod.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');"> <i class="fa fa-times"></i></a>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+   </div>
+</div> 
+</div>
+
+<!-- DIALOG NEW -->
+<div id="newFour" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newFour')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouveau Fournisseur</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="code" data-minlength="5" data-required="1" class="form-control" placeholder="Code Fournisseur" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nom" data-minlength="5" data-required="1" class="form-control" placeholder="Nom Fournisseur" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Téléphone <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="tel" data-minlength="5" data-required="1" class="form-control" placeholder="Téléphone Fournisseur" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Adresse <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="adr" data-minlength="5" data-required="1" class="form-control" placeholder="Adresse Fournisseur" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">E-mail <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="email" name="mail" data-minlength="5" data-required="1" class="form-control" placeholder="E-mail Fournisseur" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Type <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                 	<select class="form-control" name="type">
+                                    <option>Grossiste</option>
+                                    <option>Pharmacie</option>
+                                 </select>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code Postal <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                 	<select class="form-control" name="cp">
+                                 	{% for cod in code %}
+                                    <option value ="{{ cod.id }}">{{ cod.nom}} - {{cod.ville.nom}}</option>
+                                    {% endfor %}
+                                 </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+<div id="newFab" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newFab')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouveau Fabriquant</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="code" data-minlength="5" data-required="1" class="form-control" placeholder="Code Fabriquant" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nom" data-minlength="5" data-required="1" class="form-control" placeholder="Nom Fabriquant" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Téléphone <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="tel" data-minlength="5" data-required="1" class="form-control" placeholder="Téléphone Fabriquant" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Adresse <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="adr" data-minlength="5" data-required="1" class="form-control" placeholder="Adresse Fabriquant" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">E-mail <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="email" name="mail" data-minlength="5" data-required="1" class="form-control" placeholder="E-mail Fabriquant" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code Postal <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                 	<select class="form-control" name="cp">
+                                 	{% for cod in code %}
+                                    <option value ="{{ cod.id }}">{{ cod.nom}} - {{cod.ville.nom}}</option>
+                                    {% endfor %}
+                                 </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div> 
+{% endblock %}

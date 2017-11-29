@@ -1,0 +1,321 @@
+{% set idUser = 1 %}
+{% extends "::base.html.twig" %}
+
+{% block title %}User | Pharma'Net {% endblock %}
+
+{% block stylesheets %}
+<!-- BEGIN SPECIFIC PAGE STYLES -->
+<!-- END BEGIN SPECIFIC PAGE STYLES -->
+{% endblock %}
+
+{% block Utilisateur %}active{% endblock %}
+
+
+{% block page_header %}
+                <h3 class="page-title">
+                Utilisateur</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li> 
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Utilisateur</a>
+                        </li>
+                    </ul>
+                    <div class="page-toolbar">
+                        <div class="btn-group pull-right">
+                     <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                     Actions <i class="fa fa-angle-down"></i>
+                     </button>
+                     <ul class="dropdown-menu pull-right" role="menu">
+                        <li>
+                           <a href="#responsive">New User </a>
+                              <div id="responsive" class="modal fade" tabindex="-1" data-width="760">
+                           <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                              <h4 class="modal-title">Responsive</h4>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                              <button type="button" class="btn blue">Save changes</button>
+                           </div>
+                        </div>
+ 
+                        </li>
+                        <li>
+                           <a href="#">Another action</a>
+                        </li>
+                        <li>
+                           <a href="#">Something else here</a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        <li>
+                           <a href="#">Separated link</a>
+                        </li>
+                     </ul>
+                  </div>
+                    </div>
+                </div>
+{% endblock %}
+
+{% block pharma %} open active {% endblock %}
+
+{% block User %} active {% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+   <div class="portlet box blue">
+      <div class="portlet-title">
+                        <div class="caption">
+                           <i class="fa fa-globe"></i>Liste des utilisateurs
+                        </div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+      <div class="portlet-body">
+         <div class="table-toolbar">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="btn-group">
+                                    <a href="#new" data-toggle="modal" class="reload">
+                                    <button id="sample_editable_1_new" class="btn blue">
+                                    Add User <i class="fa fa-plus"></i>
+                                    </button>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+         <table lass="table table-striped table-bordered table-hover" id="util">
+            <thead>
+                        <tr>
+                           <th class="table-checkbox">
+                            <input type="checkbox" class="group-checkable" data-set="#util .checkboxes"/>
+                           </th>
+                           <th>
+                               Name
+                           </th>
+                           <th>
+                               Surname
+                           </th>
+                           <th>
+                               Email
+                           </th>
+                           <th>
+                               Phone
+                           </th>
+                           <th>
+                               Type
+                           </th>
+                           <th>
+                               Etat
+                           </th>
+                           <th>
+                           </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                           {% for users in user %}
+                               <tr class="odd gradeX">
+                                 <td>
+                                    <input type="checkbox" class="checkboxes" value="1"/>
+                                 </td>
+                                 <td>{{users.name}}</td> 
+                                 <td>{{users.surname}}</td> 
+                                 <td><a href="mailto:{{users.email}}">
+                                 {{users.email}}</a></td>
+                                 <td>{{users.telephone}}</td>
+                                 <td><span class="label label-sm label-success">
+                                 {{users.type}}</span></td>
+                                 <td>
+                                    {% if  users.etat == 'ACTIF'%}
+                                    <span class="label label-sm label-success">
+                                 {{users.etat}}</span>
+                                    {% else %}
+                                    <span class="label label-sm label-danger">
+                                 {{users.etat}}</span>
+                                    {% endif %}
+                                 </td>
+                                 <td>
+                                    <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-horizontal"></i> Actions <i class="fa fa-angle-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                   <li>
+                                                      {% if  users.etat == 'ACTIF'%}
+                                                         <a href="{{path('activeUser',{'id':users.id})}}"><i class="fa fa-times"></i>
+                                                         Désactiver </a>
+                                                         {% else %}
+                                                         <a href="{{path('activeUser',{'id':users.id})}}"><i class="fa fa-check"></i>
+                                                      Activer </a>
+                                                         {% endif %}
+                                                   </li>
+                                                   <li>
+                                                      <a href="{{path('updateUser',{'id':users.id})}}"><i class="fa fa-pencil"></i>
+                                                      Modifier </a>
+                                                   </li>
+                                                   <li>
+                                                      <a href="{{path('deleteUser',{'id':users.id})}}" data-toggle="modal" {% set idUser = users.id %}><i class="fa fa-trash-o"></i>
+                                                       Supprimer</a>
+                                                   </li>
+                                                </ul>
+                                             </div>
+
+                                 </td>
+                               </tr> 
+                             {% endfor %}
+                        </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+
+      
+<!-- BEGIN SPECIFIC DIALOG PAGE new user, dialog delete user, -->
+<div class=" form modal fade" id="new" tabindex="-1" data-backdrop="static" data-keyboard="false">
+   <form action="{{path('newUser')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                                    <h4 class="modal-title">Nouveau Utilisateur</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-danger display-hide">
+                                 <button class="close" data-close="alert"></button>
+                                 You have some form errors. Please check below.
+                              </div>
+                              <div class="alert alert-success display-hide">
+                                 <button class="close" data-close="alert"></button>
+                                 Your form validation is successful!
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Name <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="name" data-minlength="5" data-required="1" class="form-control" placeholder="Name"/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Surname <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="surname" data-required="1" class="form-control" placeholder="Surname"/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="col-md-3 control-label">Email Address <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <div class="input-group">
+                                       <input type="email" name="email" class="form-control" placeholder="Email Address">
+                                       <span class="input-group-addon">
+                                       <i class="fa fa-envelope"></i>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="col-md-3 control-label">Phone Address <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <div class="input-group">
+                                       <input type="text" name="phone" class="form-control" placeholder="Phone Address">
+                                       <span class="input-group-addon">
+                                       <i class="fa fa-phone"></i>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="col-md-3 control-label">Password<span class="required">
+                                 * </span></label>
+                                 <div class="col-md-6">
+                                 <div class="input-group">
+                                    <input type="password" name="passwd" class="form-control" id="" placeholder="Password">
+                                    <span class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                    </span>
+                                 </div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="col-md-3 control-label">Type Utilisateur<span class="required">
+                                 * </span></label>
+                                 <div class="col-md-6">
+                                 <select class="form-control" name="type">
+                                    <option>Administrateur</option>
+                                    <option>Gestionnaire Stock</option>
+                                    <option>Vendeur</option>
+                                 </select>
+                              </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="col-md-3 control-label">Etat Utilisateur<span class="required">
+                                 * </span></label>
+                                 <div class="col-md-6">
+                                 <select class="form-control" name="etat">
+                                    <option>ACTIF</option>
+                                    <option>INACTIF</option>
+                                 </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   </div>
+   </div>
+   </form>
+</div> 
+
+
+ <div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Confirmation</h4>
+                                 </div>
+                                 <div class="modal-body">
+                                    <p>
+                                        Etes vous sûre de vouloir supprimer cette Utilisateur ?
+                                    </p>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn default" >Cancel</button>
+                                    <a href="{{path('deleteUser',{'id':idUser})}}" data-toggle="modal">
+                                       <button data-dismiss="modal" class="btn green">Ok {{idUser}}</button></a>
+                                    
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+{% endblock %}

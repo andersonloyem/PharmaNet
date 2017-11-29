@@ -1,0 +1,192 @@
+{% extends "::base.html.twig" %}
+
+{% block title %} Facturation | Pharma'Net{% endblock %}
+
+{% block stylesheets %} 
+<style>
+	.invoice table {
+  margin: 30px 0 30px 0;
+}
+
+.invoice .invoice-logo {
+  margin-bottom: 20px;
+}
+
+.invoice .invoice-logo p {
+  padding: 5px 0;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: right;
+}
+
+.invoice .invoice-logo p span {
+  display: block;
+  font-size: 14px;
+}
+
+.invoice .invoice-logo-space {
+  margin-bottom: 15px;
+}
+
+.invoice .invoice-payment strong {
+  margin-right: 5px;
+}
+
+.invoice .invoice-block {
+  text-align: right;
+}
+
+.invoice .invoice-block .amounts {
+  margin-top: 20px;
+  font-size: 14px;
+}
+</style>
+{% endblock %}
+
+{% block vente %} active {% endblock %}
+{% block facture %} active {% endblock %}
+
+{% block page_header %}
+                <h3 class="page-title">
+               Facturation</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">vente</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Facturation</a>
+                        </li>
+                    </ul>
+                </div>
+{% endblock %}
+
+{% block body %}
+<div class="cod-md-12">
+	<div class="portlet light">
+					<div class="portlet-body">
+						<div class="invoice">
+							<div class="row invoice-logo">
+								<div class="col-xs-4">
+									<p>{{phar.nom}}<br>{{phar.adresse}}<br>{{phar.telephone}}
+									</p>
+								</div>
+								<div class="col-xs-4">
+									<div class="col-xs-6 invoice-logo-space">
+										<img src="{{ asset('public/images/walmart.png') }}" class="img-responsive" alt=""/>
+									</div>
+								</div>
+								<div class="col-xs-4 invoice-payment">
+									<h3>{{vente.malade.nom}}</h3>
+									<p>{{vente.malade.codePostal.nom}} - {{vente.malade.codePostal.ville.nom}}</h3>
+								</div>
+							</div>
+							<hr/>
+							<div class="row">
+								<div class="col-xs-4">
+									<h3>{{phar.nom}}</h3>
+									<p>{{phar.adresse}}</p><br/>
+									<p>{{phar.telephone}}</p>
+								</div>
+								<div class="col-xs-4">
+									<div class="col-xs-6 invoice-logo-space">
+										<img src="{{ asset('public/images/walmart.png') }}" class="img-responsive" alt=""/>
+									</div>
+								</div>
+								<div class="col-xs-4 invoice-payment">
+									<h3>{{vente.malade.nom}}</h3>
+									<p>{{vente.malade.codePostal.nom}} - {{vente.malade.codePostal.ville.nom}}</h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<table class="table table-striped table-hover">
+									<thead>
+									<tr>
+										<th>
+											 #
+										</th>
+										<th>
+											 Item
+										</th>
+										<th class="hidden-480">
+											 Description
+										</th>
+										<th class="hidden-480">
+											 Quantity
+										</th>
+										<th class="hidden-480">
+											 Unit Cost
+										</th>
+										<th>
+											 Total
+										</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td>
+											 2
+										</td>
+										<td>
+											 Furniture
+										</td>
+										<td class="hidden-480">
+											 Office furniture purchase
+										</td>
+										<td class="hidden-480">
+											 15
+										</td>
+										<td class="hidden-480">
+											 $169
+										</td>
+										<td>
+											 $4169
+										</td>
+									</tr>
+									</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-4">
+									<div >
+										<address>
+										<strong>Loop, Inc.</strong><br/>
+										795 Park Ave, Suite 120<br/>
+										San Francisco, CA 94107<br/>
+										<abbr title="Phone">P:</abbr> (234) 145-1810 </address>
+										<address>
+									</div>
+								</div>
+								<div class="col-xs-8 invoice-block">
+									<ul class="list-unstyled amounts">
+										<li>
+											<strong>Sub - Total amount:</strong> $9265
+										</li>
+										<li>
+											<strong>Grand Total:</strong> $12489
+										</li>
+									</ul>
+									<br/>
+									<a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+									Print <i class="fa fa-print"></i>
+									</a>
+									<a class="btn btn-lg green hidden-print margin-bottom-5">
+									Submit Your Invoice <i class="fa fa-check"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+	</div>
+</div>
+{% endblock %}
+
+

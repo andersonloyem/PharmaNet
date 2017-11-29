@@ -1,0 +1,20 @@
+vente:
+    resource: "@VenteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+stock:
+    resource: "@StockBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+dash:
+    resource: "@DashBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+

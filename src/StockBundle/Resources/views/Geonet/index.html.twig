@@ -1,0 +1,577 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Géo Net | Pharma'Net{% endblock %}
+
+{% block page_header %}
+                <h3 class="page-title">
+                Géo Net</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Géo Net</a>
+                        </li>
+                    </ul>
+                    <div class="page-toolbar">
+                    </div>
+                </div>
+{% endblock %}
+
+{% block geoliste %}active{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+<div class="col-md-6">
+	<div class="portlet light">
+				<div class="portlet-title">
+								<div class="caption blue">
+									<i class="fa fa-tasks  font-blue"></i></i>Liste des Rayons
+								</div>
+						<div class="actions">
+									<a class="btn btn-circle blue" data-target="#newRayon" data-toggle="modal">
+									<i class="fa fa-plus"></i> Add </a>
+									<a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen"></a>
+								</div>
+                     </div>
+	<div class="portlet-body">
+		<table class="table table-striped table-bordered table-hover" id="rayon">
+        <thead>
+            <tr>
+            	<th class="table-checkbox">
+					<input type="checkbox" class="group-checkable" data-set="#rayon .checkboxes"/>
+				</th>
+                <th>Code</th>
+                <th>Nom</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+            	{% for ray in rayon %}
+            <tr class="odd gradeX">
+            	<td>
+					<input type="checkbox" class="checkboxes" value="1"/>
+				</td>
+                <td>{{ ray.code }}</td>
+                <td>{{ ray.nom }}</td>
+                <td class="center"><a href="{{path('delRayon',{'id':ray.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');">
+									<i class="fa fa-times"></i>  </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	</div>
+</div>
+
+</div>
+<div class="col-md-6">
+	<div class="portlet light">
+				<div class="portlet-title">
+								<div class="caption blue">
+									<i class="fa fa-tasks  font-blue"></i></i>Liste des Magasins
+								</div>
+						<div class="actions">
+									<a class="btn btn-circle blue" data-target="#newMag" data-toggle="modal">
+									<i class="fa fa-plus"></i> Add </a>
+									<a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen"></a>
+								</div>
+                     </div>
+	<div class="portlet-body">
+		<table class="table table-striped table-bordered table-hover" id="sample_3">
+        <thead>
+            <tr>
+            	<th class="table-checkbox">
+					<input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/>
+				</th>
+                <th>Code</th>
+                <th>Nom</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+            	{% for ray in mag %}
+            <tr class="odd gradeX">
+            	<td>
+					<input type="checkbox" class="checkboxes" value="1"/>
+				</td>
+                <td>{{ ray.code }}</td>
+                <td>{{ ray.nom }}</td>
+                <td><a href="{{path('delMag',{'id':ray.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');">
+									<i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	</div>
+	</div>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="col-md-6">
+<div class="portlet light">
+				<div class="portlet-title">
+								<div class="caption blue">
+									<i class="fa fa-tasks  font-blue"></i></i>Liste des Codes Postaux
+								</div>
+						<div class="actions">
+									<a data-target="#newCP" data-toggle="modal" class="btn btn-circle blue">
+									<i class="fa fa-plus"></i> Add </a>
+									<a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen"></a>
+								</div>
+                     </div>
+	<div class="portlet-body">
+		<table class="table table-striped table-bordered table-hover" id="cp">
+        <thead>
+            <tr>
+            	<th class="table-checkbox">
+					<input type="checkbox" class="group-checkable" data-set="#cp .checkboxes"/>
+				</th>
+                <th>Code</th>
+                <th>Code Postal</th>
+                <th>Ville</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+            	{% for cod in cp %}
+            <tr class="odd gradeX">
+            	<td>
+					<input type="checkbox" class="checkboxes" value="1"/>
+				</td>
+                <td>{{ cod.code }}</td>
+                <td>{{ cod.nom }}</td>
+                <td>{{ cod.ville.nom }}</td>
+                <td><a href="{{path('delCP',{'id':cod.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');">
+									<i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	</div>
+</div>
+</div>
+
+<div class="col-md-6">
+	<div class="portlet light">
+				<div class="portlet-title">
+								<div class="caption blue">
+									<i class="fa fa-tasks  font-blue"></i></i>Liste des Villes
+								</div>
+						<div class="actions">
+									<a data-target="#newVille" data-toggle="modal" class="btn btn-circle blue">
+									<i class="fa fa-plus"></i> Add </a>
+									<a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen"></a>
+								</div>
+                     </div>
+	<div class="portlet-body">
+		<table class="table table-striped table-bordered table-hover" id="ville">
+        <thead>
+            <tr>
+            	<th class="table-checkbox">
+					<input type="checkbox" class="group-checkable" data-set="#ville .checkboxes"/>
+				</th>
+                <th>Code</th>
+                <th>Nom</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+            	{% for cod in ville %}
+            <tr class="odd gradeX">
+            	<td>
+					<input type="checkbox" class="checkboxes" value="1"/>
+				</td>
+                <td>{{ cod.code }}</td>
+                <td>{{ cod.nom }}</td>
+                <td><a href="{{path('delVille',{'id':cod.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');">
+									<i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	</div>
+</div>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="col-md-6">
+	<div class="portlet light">
+				<div class="portlet-title">
+								<div class="caption blue">
+									<i class="fa fa-tasks  font-blue"></i></i>Liste des Formes
+								</div>
+						<div class="actions">
+									<a  class="btn btn-circle blue" data-target="#newForme" data-toggle="modal">
+									<i class="fa fa-plus"></i> Add </a>
+									<a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen"></a>
+								</div>
+                     </div>
+	<div class="portlet-body">
+		<table class="table table-striped table-bordered table-hover" id="forme">
+        <thead>
+            <tr>
+            	<th class="table-checkbox">
+					<input type="checkbox" class="group-checkable" data-set="#forme .checkboxes"/>
+				</th>
+                <th>Code</th>
+                <th>Nom</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+            	{% for cod in forme %}
+            <tr class="odd gradeX">
+            	<td>
+					<input type="checkbox" class="checkboxes" value="1"/>
+				</td>
+                <td>{{ cod.code }}</td>
+                <td>{{ cod.nom }}</td>
+                <td><a href="{{path('delForme',{'id':cod.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');">
+									<i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	</div>
+</div>
+</div>
+
+<div class="col-md-6">
+	<div class="portlet light">
+				<div class="portlet-title">
+								<div class="caption blue">
+									<i class="fa fa-tasks font-blue"></i></i>Liste des Unités
+								</div>
+						<div class="actions">
+									<a data-target="#newUnite" data-toggle="modal" class="btn btn-circle blue">
+									<i class="fa fa-plus"></i> Add </a>
+									<a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen"></a>
+								</div>
+                     </div>
+	<div class="portlet-body">
+		<table class="table table-striped table-bordered table-hover" id="unite">
+        <thead>
+            <tr>
+            	<th class="table-checkbox">
+					<input type="checkbox" class="group-checkable" data-set="#unite .checkboxes"/>
+				</th>
+                <th>Nom</th>
+                <th>Libéllé</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+            	{% for cod in unite %}
+            <tr class="odd gradeX">
+            	<td>
+					<input type="checkbox" class="checkboxes" value="1"/>
+				</td>
+                <td>{{ cod.nom }}</td>
+                <td>{{ cod.libelle }}</td>
+                <td><a href="{{path('delUnite',{'id':cod.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');">
+									<i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	</div>
+</div>
+</div>
+</div>
+
+
+<!-- DIALOG NEW -->
+<script>
+function valider(){
+  // si la valeur du champ prenom est non vide
+  if(document.rayonForm.codeRayon.value != "") {
+    document.rayonForm.action = "" ;  
+    return true;
+  }
+  else {
+    // sinon on affiche un message
+    alert("Saisissez le prénom");
+    $("#newRayon").modal("show");
+    //return false; onsubmit="valider();"
+  }
+}
+</script>
+<div id="newRayon" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form name="rayonForm" action="{{path('newRayon')}}" class="form-horizontal" method="POST" data-toggle="validator" >
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouveau Rayon</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="codeRayon" maxlength="7" data-required="1" class="form-control" placeholder="Code rayon" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nomRayon" data-required="1" class="form-control" placeholder="Nom Rayon" required/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue"><i class="fa fa-save"></i> Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+<div id="newMag" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newMag')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouveau Magasin</h4>
+                                 </div>
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="codeMag" maxlength="7" data-required="1" class="form-control" placeholder="code Magasin" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nomMag" data-minlength="5" data-required="1" class="form-control" placeholder="Nom Magasin" required/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+<div id="newCP" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newCP')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouveau Code Postal</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="code" data-minlength="5" data-required="1" class="form-control" placeholder="Code CP" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Code Postal <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="cp" data-minlength="5" data-required="1" class="form-control" placeholder="CP" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="col-md-3 control-label">Ville<span class="required">
+                                 * </span></label>
+                                 <div class="col-md-6">
+                                 <select class="form-control" name="ville">
+                                 	{% for cod in ville %}
+                                    <option value ="{{ cod.id }}">{{ cod.nom }}</option>
+                                    {% endfor %}
+                                 </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+<div id="newVille" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newVille')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouvelle Ville</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="codeVille" data-minlength="5" data-required="1" class="form-control" placeholder="Code Ville" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nomVille" data-minlength="5" data-required="1" class="form-control" placeholder="Nom Ville" required/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+<div id="newForme" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newForme')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouvelle Forme</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="codeForme" data-minlength="5" data-required="1" class="form-control" placeholder="Code Forme" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nomForme" data-minlength="5" data-required="1" class="form-control" placeholder="Nom Forme" required/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+<div id="newUnite" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newUnite')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouvelle Unité</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Libéllé <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="libUnite" data-minlength="5" data-required="1" class="form-control" placeholder="Libéllé" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Abrèg <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nomUnite" data-minlength="5" data-required="1" class="form-control" placeholder="Abrèg" required/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+{% endblock %}

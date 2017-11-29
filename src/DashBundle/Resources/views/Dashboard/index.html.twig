@@ -1,0 +1,62 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Pharma'Net | DashBoard {% endblock %}
+
+{% block stylesheets %}
+  <!-- BEGIN GLOBAL MANDATORY STYLES -->
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN THEME STYLES -->
+<!-- END THEME STYLES -->
+{% endblock %}
+
+{% block Dashboard %}active
+{% endblock %}
+
+{% block page_header %}
+     <h3 class="page-title">
+                Dashboard</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="index.html">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                    </ul>
+                    <div class="page-toolbar">
+                        <div id="dashboard-report-range" class="tooltips btn btn-fit-height btn-sm green-haze btn-dashboard-daterange" data-container="body" data-placement="left" data-original-title="Change dashboard date range">
+                            <i class="icon-calendar"></i>
+                            &nbsp;&nbsp; <i class="fa fa-angle-down"></i></i>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-md-12">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="dashboard-stat dashboard-stat-light blue-soft" href="javascript:;">
+                        <div class="visual">
+                            <i class="fa fa-comments"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                 1349
+                            </div>
+                            <div class="desc">
+                                 New Feedbacks
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+{% endblock %}

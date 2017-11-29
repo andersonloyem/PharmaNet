@@ -1,0 +1,320 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Client - Assureur | Pharma'Net{% endblock %}
+{% block liste %} active {% endblock %}
+{% block client %} active {% endblock %}
+{% block page_header %}
+                <h3 class="page-title">
+                Client / Assureur</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Liste</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Client / Assureur</a>
+                        </li>
+                    </ul>
+                </div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+    <div class="portlet box blue">
+				<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-plus-square"></i></i>Liste des Malades
+								</div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+<div class="portlet-body">
+    <div class="table-toolbar">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="btn-group">
+                                    <button data-target="#newCli" data-toggle="modal" class="btn btn-circle blue">
+                                    Add Malade <i class="fa fa-plus"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+	<table class="table table-striped table-bordered table-hover" id="prod" >
+        <thead>
+            <tr>
+                <th class="table-checkbox">
+                    <input type="checkbox" class="group-checkable" data-set="#prod .checkboxes"/>
+                </th>
+                <th>Nom</th>
+                <th>Poid / Taille</th>
+                <th>Téléphone</th>
+                <th>Code Postal</th>
+                <th>Assureur</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+          {% for cli in client %}
+            <tr class="odd gradeX">
+                <td>
+                    <input type="checkbox" class="checkboxes" value="1"/>
+                </td>
+                <td>{{ cli.nom }}</td>
+                <td>{{ cli.poid }} / {{ cli.taille }}</td>
+                <td>{{ cli.telephone}}</td>
+                <td>{{ cli.codePostal.nom}} - {{cli.codePostal.ville.nom}}</td>
+                <td>{% if(cli.assureur.nom is defined) %}{{ cli.assureur.nom}} {% endif%}</td>
+                <td>
+                	<a href="{{path('updateUser',{'id':cli.id})}}" class="btn btn-icon-only btn-circle blue"><i class="fa fa-pencil"></i></a>
+                    <a href="{{path('delClient',{'id':cli.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');"> <i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+   </div>
+
+<div class="col-md-12">
+        <div class="portlet box blue">
+				<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-plus-square"></i></i>Liste des Assureurs
+								</div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+<div class="portlet-body">
+    <div class="table-toolbar">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="btn-group">
+                                    <button data-target="#newAss" data-toggle="modal" class="btn btn-circle blue">
+                                    Add Assureur <i class="fa fa-plus"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+	<table class="table table-striped table-bordered table-hover" id="unite" >
+        <thead>
+            <tr>
+                <th class="table-checkbox">
+                    <input type="checkbox" class="group-checkable" data-set="#unite .checkboxes"/>
+                </th>
+                <th>Nom</th>
+                <th>Taux</th>
+                <th>Téléphone</th>
+                <th>Code Postal</th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+          {% for cli in assureur %}
+            <tr class="odd gradeX">
+                <td>
+                    <input type="checkbox" class="checkboxes" value="1"/>
+                </td>
+                <td>{{ cli.nom }}</td>
+                <td>{{ cli.taux}}</td>
+                <td>{{ cli.telephone}}</td>
+                <td>{{ cli.codePostal.nom}} - {{cli.codePostal.ville.nom}}</td>
+                <td>
+                	<a href="{{path('updateUser',{'id':cli.id})}}" class="btn btn-icon-only btn-circle blue"><i class="fa fa-pencil"></i></a>
+                    <a href="{{path('delAss',{'id':cli.id})}}" class="btn btn-icon-only btn-circle red" onclick="return confirm('Voulez-vous vraiment supprimer cette informations ?');"> <i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+<!-- DIALOG NEW -->
+<div id="newCli" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newClient')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouveau Malade</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nom" data-required="1" class="form-control" placeholder="Nom Malade" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Téléphone <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="tel" name="tel" maxlength="14" data-required="1" class="form-control" placeholder="Téléphone Malade" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Mode Règlement <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                 	<select class="form-control" name="regl">
+                                    <option selected>Espèces</option>
+                                    <option>Chèques</option>
+                                    <option>Carte Banquaire</option>
+                                    <option>Virement</option>
+                                    <option>Rémise</option>
+                                 </select>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Poid <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="number" name="poid" maxlength="6" data-required="1" class="form-control" placeholder="Poid Malade" />
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Taille <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="number" name="taille" maxlength="3" data-required="1" class="form-control" placeholder="Taille Malade" />
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code Postal <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                 	<select class="form-control" name="cp">
+                                 	{% for cod in code %}
+                                    <option value ="{{ cod.id }}">{{ cod.nom}} - {{cod.ville.nom}}</option>
+                                    {% endfor %}
+                                 </select>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Assureur
+                                 </label>
+                                 <div class="col-md-6">
+                                 	<select class="form-control" name="ass">
+                                    <option selected>Aucun</option>
+                                 	{% for cod in assureur %}
+                                    <option value ="{{ cod.id }}">{{ cod.nom}}</option>
+                                    {% endfor %}
+                                 </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+
+<div id="newAss" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newAss')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouveau Assureur</h4>
+                                 </div>
+         
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nom" data-required="1" class="form-control" placeholder="Nom Assureur" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Téléphone <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="tel" name="tel" maxlength="14" data-required="1" class="form-control" placeholder="Téléphone Malade" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Taux <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="number" name="taux" maxlength="14" data-required="1" class="form-control" placeholder="Téléphone Malade" required/>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code Postal <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                 	<select class="form-control" name="cp">
+                                 	{% for cod in code %}
+                                    <option value ="{{ cod.id }}">{{ cod.nom}} - {{cod.ville.nom}}</option>
+                                    {% endfor %}
+                                 </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+
+{% endblock %}

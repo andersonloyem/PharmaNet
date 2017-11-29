@@ -1,0 +1,260 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Catégorie | Pharma'Net{% endblock %}
+
+{% block page_header %}
+                <h3 class="page-title">
+                Catégorie</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Liste</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Catégorie</a>
+                        </li>
+                    </ul>
+                    <div class="page-toolbar">
+                        <div class="btn-group pull-right">
+                     <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                     Actions <i class="fa fa-angle-down"></i>
+                     </button>
+                     <ul class="dropdown-menu pull-right" role="menu">
+                        <li>
+                           <a href="#responsive">New User </a>
+                              <div id="responsive" class="modal fade" tabindex="-1" data-width="760">
+                           <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                              <h4 class="modal-title">Responsive</h4>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                              <button type="button" class="btn blue">Save changes</button>
+                           </div>
+                        </div>
+ 
+                        </li>
+                        <li>
+                           <a href="#">Another action</a>
+                        </li>
+                        <li>
+                           <a href="#">Something else here</a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        <li>
+                           <a href="#">Separated link</a>
+                        </li>
+                     </ul>
+                  </div>
+                    </div>
+                </div>
+{% endblock %}
+
+{% block liste %} active {% endblock %}
+{% block Categorie %}active{% endblock %}
+
+{% block body %}
+<div class="col-md-3">
+<div class="portlet box blue">
+				<div class="portlet-title">
+								<div class="caption">
+									<i class="icon-basket"></i></i>Liste des Catégories
+								</div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+<div class="portlet-body">
+
+<div class="table-toolbar">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="btn-group">
+                                    <button class="btn blue btn-circle" data-target="#newCat" data-toggle="modal"><i class="fa fa-plus"></i> Add Catégorie</button>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+<div id="tree_1" class="tree-demo">
+									<ul>
+										<li>
+											Liste des catégories
+											{% for cat in cats %}
+												<li data-jstree='{ "opened" : true }'>
+													<a href="javascript:;">
+													{{ cat.nom }} ({{ cat.code}})</a>
+												</li>
+											{% endfor %}
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+<div class="col-md-9">
+	<div class="portlet box blue">
+				<div class="portlet-title">
+								<div class="caption">
+									<i class="icon-basket"></i></i>Détails sur la Catégorie
+								</div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+<div class="portlet-body">
+	<form class="form-horizontal form-row-seperated"  method="POST">
+        <div class="note note-success blue">
+                              </div>
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-basket blue"></i>
+                                        <span class="caption-subject blue bold uppercase blue">
+                                        </span>
+                                        <span class="caption-helper"></span>
+                                    </div>
+                                    <div class="actions btn-set">
+                                        <button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-print"></i> Imprimer</button>
+                                        <button class="btn blue btn-circle"><i class="fa fa-plus"></i> Add sous-catégorie</button>
+                                  </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="nav tabbable">
+                                        <ul class="nav nav-pills blue">
+                                            <li class="active">
+                                                <a href="#tab_pro" data-toggle="tab" class="blue">
+                                                Produit </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_pal" data-toggle="tab">
+                                                Palmarés </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_stock" data-toggle="tab">
+                                                Stock </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_histo" data-toggle="tab">
+                                                Histo des Ventes </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_dash" data-toggle="tab">
+                                                Tableau de Bord </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content no-space">
+                                            <div class="tab-pane active" id="tab_pro">
+												<table class="table table-striped table-bordered table-hover" id="prod" >
+														<thead>
+															<tr>
+																<th class="table-checkbox">
+																	<input type="checkbox" class="group-checkable" data-set="#prod .checkboxes"/>
+																</th>
+																<th>ean13</th>
+																<th>Nom</th>
+																<th>Stock R&M</th>
+																<th>TVA</th>
+																<th>Prix public</th>
+																<th>Prix Achat</th>
+															</tr>
+														</thead> 
+														<tbody>
+														  {% for prod in produit %}
+															<tr class="odd gradeX">
+																<td>
+																	<input type="checkbox" class="checkboxes" value="1"/>
+																</td>
+																<td>{{ prod.ean13 }}</td>
+																<td><a href="{{path('updateProduit',{'id':prod.id})}}">{{ prod.nom }}</a></td>
+																<td>{{ prod.stock + prod.stockMag}}</td>
+																<td>{{ prod.tva }}</td>
+																<td>{{ prod.prixPublic }}</td>
+																<td>{{ prod.prixAchat }}</td>
+															</tr>
+															{% endfor %}
+														</tbody>
+													</table>
+                                            </div>
+                                            <div class="tab-pane" id="tab_pal">
+												
+                                            </div>
+                                            <div class="tab-pane" id="tab_stock">
+                                            </div>
+                                            <div class="tab-pane" id="tab_histo">
+													
+												   
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+</div>
+</div>
+</div>
+
+<div id="newCat" class="modal fade" tabindex="-1" data-width="400" data-backdrop="static" data-keyboard="false" >
+	<form action="{{path('newCat')}}" id="userForm" class="form-horizontal" method="POST" data-toggle="validator">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Nouvelle Catégorie</h4>
+                                 </div>
+                           <div class="form-body">
+                              <div class="alert alert-success">
+                                 Merci d'entrée des informations valides, le code doit etre uniques !
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3">Code <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="codeCat" maxlength="7" data-required="1" class="form-control" placeholder="code Catégorie" required/>
+                                 </div>
+                              </div>
+							  <div class="form-group">
+                                 <label class="control-label col-md-3">Nom <span class="required">
+                                 * </span>
+                                 </label>
+                                 <div class="col-md-6">
+                                    <input type="text" name="nomCat" data-minlength="5" data-required="1" class="form-control" placeholder="Nom Catégorie" required/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-actions modal-footer">
+                              <div class="row">
+                                 <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn blue">Submit</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+   			</div>
+	   </div>
+   </form>
+</div>
+{% endblock %}

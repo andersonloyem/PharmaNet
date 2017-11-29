@@ -1,0 +1,96 @@
+{% extends "::base.html.twig" %}
+
+{% block title %} My Officine | Pharma'Net{% endblock %}
+{% block pharma %} active {% endblock %}
+{% block off %} active {% endblock %}
+
+{% block page_header %}
+                <h3 class="page-title">
+               My Officine</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">My officine</a>
+                        </li>
+                    </ul>
+                </div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+    <div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-gift"></i>Information Propre de l'Officine
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse">
+									</a>
+									<a href="#portlet-config" data-toggle="modal" class="config">
+									</a>
+									<a href="javascript:;" class="reload">
+									</a>
+								</div>
+							</div>
+							<div class="portlet-body">
+                                <div class="space20">
+										</div>
+										<!-- BEGIN FORM-->
+										<form action="{{path('setconfig')}}" method="post">
+                                            <div class="note note-info">
+                                                <h3 class="block">Contacts</h3>
+                                                <p>
+                                                     Veillez entrer le nom, le téléphone, l'adresse, le slogan ainsi que le code postal de votre offcine
+                                                     <br/> Ces informations apparaitront sur le BL et la facture de votre client
+                                                </p>
+                                            </div>
+											<div class="form-group col-md-6">
+												<div class="input-icon">
+													<i class="fa fa-check"></i>
+													<input type="text" class="form-control" placeholder="Nom" name="nom" value="{{phar.nom}}">
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<div class="input-icon">
+													<i class="fa fa-phone"></i>
+													<input type="tel" class="form-control" placeholder="Téléphone" name="tel" value="{{phar.telephone}}">
+												</div>
+											</div>
+                                            <div class="form-group col-md-6">
+												<div class="input-icon">
+													<i class="fa fa-home"></i>
+													<input type="text" class="form-control" placeholder="Adresse" name="adr" value="{{phar.adresse}}">
+												</div>
+											</div>
+                                            <div class="form-group col-md-6">
+												<div class="input-icon">
+													<i class="fa fa-codepen"></i>
+													<input type="text" class="form-control" placeholder="Slogan" name="slog" value="{{phar.slogan}}">
+												</div>
+											</div>
+                                            <div class="form-group col-md-6">
+												<div class="input-icon">
+													<i class="fa fa-ban"></i>
+													<input type="text" class="form-control" placeholder="Numéro de Contribuable" name="no" value="{{phar.numero}}">
+												</div>
+											</div>
+                                            <div class="form-group col-md-6">
+												<div class="input-icon">
+													<i class="fa fa-life-ring"></i>
+													<input type="file" class="form-control" placeholder="Logo" name="logo">
+												</div>
+											</div>
+                                            <div class="form-actions">
+                                                <input type="submit" class="btn blue" value="Enregistrer"/>
+                                                <input type="reset" class="btn default" value="Reset"/>
+                                            </div>
+										</form> 
+                            </div>
+						</div>
+</div>
+{% endblock %}

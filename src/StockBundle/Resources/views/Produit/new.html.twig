@@ -1,0 +1,350 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}New produit | Pharma'Net{% endblock %}
+
+{% block page_header %}
+                <h3 class="page-title">
+                Nouveau Produit </h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="{{path('produit')}}">Produit</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Nouveau produit</a>
+                        </li>
+                    </ul>
+                    </div>
+{% endblock %}
+{% block liste %} active {% endblock %}
+{% block Produit %} active{% endblock %}
+
+{% block body %}
+<script>
+function valider(){
+	/*var dat = document.datPeremp.value.split("-");
+	document.datPeremp.value = new Date(dat[2], dat[1]-1,dat[0]);
+	dat = document.datCmd.value.split("-");
+	document.datCmd.value = new Date(dat[2], dat[1]-1,dat[0]);*/
+	return confirm('Voulez-vous vraiment enregistrer ces informations du produit ?');
+	return true;
+}
+</script>
+<div class="col-md-12">
+<div class="portlet box blue">
+				<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-shopping-cart"></i></i>Nouveau produit
+								</div>
+                        <div class="tools">
+                           <a href="javascript:;" class="collapse">
+                           </a>
+                           <a href="#portlet-config" data-toggle="modal" class="config">
+                           </a>
+                           <a href="javascript:;" class="reload">
+                           </a>
+                           <a href="javascript:;" class="remove">
+                           </a>
+                        </div>
+                     </div>
+<div class="portlet-body">
+     <form class="form-horizontal form-row-seperated" action="{{path('saveProduit')}}" method="POST"  onsubmit="return valider();">
+        <div class="note note-success">
+			Entrez des informations valide concernant le produit. <br/>
+			Les codes ean13 est unique à chaque produit (pas de répétition).<br/>
+			{% if err is defined %}
+			{{ err }}
+			{% endif %}
+        </div>
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-basket blue"></i>
+                                        <span class="caption-subject blue bold uppercase blue">
+                                        Edit Product </span>
+                                        <span class="caption-helper">Man Tops</span>
+                                    </div>
+                                    <div class="actions btn-set">
+										<button class="btn btn-default btn-circle " type="reset"><i class="fa fa-reply"></i> Reset</button>
+                                        <button class="btn blue btn-circle"><i class="fa fa-check"></i>Enregistrer le Produit</button>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-pills blue">
+                                            <li class="active">
+                                                <a href="#tab_general" data-toggle="tab" class="blue">
+                                                Général </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_stock" data-toggle="tab">
+                                                Stock </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_prix" data-toggle="tab">
+                                                Prix </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_geo" data-toggle="tab">
+                                                Geo </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content no-space">
+                                            <div class="tab-pane active" id="tab_general">
+                                                <div class="form-body">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">ean13: <span class="required">
+                                                        * </span>
+                                                        </label>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control" name="ean13" required>
+															<span class="help-block">prod0005</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">nom: <span class="required">
+                                                        * </span>
+                                                        </label>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control" name="nom" required/>
+															<span class="help-block">JAKAVI 15MG CPR BT56</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Description: <span class="required">
+                                                        * </span>
+                                                        </label>
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control" name="description"/>
+                                                        </div>
+                                                    </div>
+
+													<div class="form-group">
+                                                        <label class="col-md-3 control-label">Unité: <span class="required">
+                                                        * </span>
+                                                        </label>
+                                                        <div class="col-md-4">
+                                                        	<select class="form-control input-xlarge select2me" name="unite" required>
+                                                                {% for un in unite %}
+							                                    <option value="{{un.id}}">{{un.nom}}</option>
+                                                                {% endfor %}
+							                                 </select>
+                                                    	</div></div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab_stock">
+                                                <div class="form-body">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Quantité en stock :<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+                                                            <input type="number" class="form-control" name="stock" maxlength="100" required>
+															<span class="help-block">20</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Quantité Max en stock:<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+                                                            <input type="number" class="form-control" name="stockmax" maxlength="100" required>
+															<span class="help-block">50</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Quantité Min en stock:<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+                                                            <input type="number" class="form-control" name="stockmin" maxlength="100" required>
+															<span class="help-block">10</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Date de péremption:<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+						                                    <div class="input-group">
+						                                       <input class="form-control" id="dateDebut" name="datPeremp" placeholder="Date de péremption" type="text" required>
+						                                       <span class="input-group-addon">
+						                                       <i class="fa fa-calendar"></i>
+						                                       </span>
+						                                    </div>
+						                                 </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Date de Commande:<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+						                                       <input class="form-control" id="dateDebut" name="datCmd" placeholder="Date de Commande" type="text" required>
+						                                       <span class="input-group-addon">
+						                                       <i class="fa fa-calendar"></i>
+						                                       </span>
+						                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Génerique:<span class="required">
+                                                        * </span></label>
+                                                       	<div class="col-md-4">
+                                                            <input type="text" class="form-control" name="generique" maxlength="100">
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab_prix">
+                                                	<div class="form-body">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Prix Public (F cfa):<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+						                                       <input class="form-control" placeholder="Prix Public" type="number" name="pp" onkeypress="myFunction()" required>
+						                                       <script>
+																	function myFunction() {
+																		if(isFloat(document.getElementByName("pp").value)) alert("entrer a flaot");
+																	}
+																	function isFloat(n){
+																		return Number(n) === n && n % 1 !== 0;
+																	}
+																</script>
+															   <span class="input-group-addon">
+						                                       <i class="fa fa-dollar"></i>
+						                                       </span>
+						                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Prix Achat (F cfa):<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+						                                       <input class="form-control" id="dateDebut" name="pa" placeholder="Prix Achat" type="number" required>
+						                                       <span class="input-group-addon">
+						                                       <i class="fa fa-dollar"></i>
+						                                       </span>
+						                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">tva:<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+						                                       <input class="form-control" name="tva" type="number" required>
+						                                       <span class="input-group-addon">
+						                                       <i class="fa fa-dollar"></i>
+						                                       </span>
+						                                    </div>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab_geo">
+                                                	<div class="form-body">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Categorie :<span class="required">
+                                                        * </span></label>
+                                                            <div class="col-md-4">
+                                                            <select class="form-control input-xlarge select2me" name="cat">
+                                                                {% for un in categorie %}
+                                                                <option value="{{un.id}}">{{un.nom}}</option>
+                                                                {% endfor %}
+                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Rayon :<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+						                                       <select class="form-control input-xlarge select2me" name="ray" required>
+							                                    {% for un in rayon %}
+                                                                <option value="{{un.id}}">{{un.nom}}</option>
+                                                                {% endfor %}
+							                                 </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Magasin :<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+						                                       <select class="form-control input-xlarge select2me" name="mag" required>
+							                                    {% for un in mag %}
+                                                                <option value="{{un.id}}">{{un.nom}}</option>
+                                                                {% endfor %}
+							                                 </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Forme :<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+						                                       <select class="form-control input-xlarge select2me" name="forme" required>
+							                                    {% for un in forme %}
+                                                                <option value="{{un.id}}">{{un.nom}}</option>
+                                                                {% endfor %}
+							                                 </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Fabriquant :<span class="required">
+                                                        * </span></label>
+                                                        <div class="col-md-4">
+						                                       <select class="form-control input-xlarge select2me" data-placeholder="Select..." name="fab" required>
+							                                    {% for un in fabriquant %}
+                                                                <option value="{{un.id}}">{{un.nom}}</option>
+                                                                {% endfor %}
+							                                 </select>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+            </div>   
+</div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<!-- BEGIN SPECIFIC PAGE STYLES -->
+
+<!-- END BEGIN SPECIFIC PAGE STYLES -->
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('public/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('public/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}"/>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="datPeremp"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'dd-mm-yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+
+      var date_input=$('input[name="datCmd"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'dd-mm-yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+{% endblock %}

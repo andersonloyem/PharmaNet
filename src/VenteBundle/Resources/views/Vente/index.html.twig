@@ -1,0 +1,98 @@
+{% extends "::base.html.twig" %}
+
+{% block title %} Facturation | Pharma'Net{% endblock %}
+
+{% block vente %} active {% endblock %}
+{% block facture %} active {% endblock %}
+
+{% block page_header %}
+                <h3 class="page-title">
+               Facturation</h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="{{path('acceuil')}}">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">vente</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Facturation</a>
+                        </li>
+                    </ul>
+                </div>
+{% endblock %}
+
+{% block body %}
+{% set idClient = null %}
+<div class="col-md-4">
+						<div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-gift"></i>Rechercher Malade à facturé
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse">
+									</a>
+									<a href="#portlet-config" data-toggle="modal" class="config">
+									</a>
+									<a href="javascript:;" class="reload">
+									</a>
+								</div>
+							</div>
+							<div class="portlet-body">
+                                <div class="form-group">
+                                                        <label class="col-md-4 control-label">Nom du  Malade :</label>
+                                                            <div class="col-md-8">
+                                                            <select id="client" class="form-control select2me" name="client" >
+                                                                <option value="0" selected disabled>Choisi le client...</option>
+                                                                {% for cli in client %}
+                                                                <option value ="{{ cli.id }}">{{ cli.nom}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div><br/><br/>
+                                <div id="clientDiv">
+									<table class="table table-hover">
+									<tbody>
+                                        <tr><td>Nom :</td><td>Jacob</td><td>Téléphone :</td><td>{{ maFonction('5') }}</td></tr>
+                                        <tr><td>Code Postal :</td><td>Jacob</td><td>Assureur :</td><td>Jacob</td></tr>
+									</tbody>
+									</table>
+								</div>
+							</div>
+    </div>
+</div>
+<script type="text/javascript">
+var client = document.getElementById("client");
+client.onchange = function(){
+    var selectedString = client.options[client.selectedIndex].value;
+    alert(selectedString);
+}
+</script>                  
+<div class="col-md-8">
+						<div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-medkit"></i>Produit du Malade
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse">
+									</a>
+									<a href="#portlet-config" data-toggle="modal" class="config">
+									</a>
+									<a href="javascript:;" class="reload">
+									</a>
+								</div>
+							</div>
+							<div class="portlet-body">
+                                
+							</div>
+    </div>
+</div>
+{% endblock %}
+
+
